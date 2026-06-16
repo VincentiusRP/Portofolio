@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vincentius Richardo Putra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0c10;
+      --surface:   #111520;
+      --card:      #161b2e;
+      --border:    #1e2740;
+      --accent:    #3b82f6;
+      --accent2:   #60a5fa;
+      --glow:      rgba(59,130,246,0.18);
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --label:     #94a3b8;
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Space Grotesk', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,12,16,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem,5vw,4rem);
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: .85rem;
+      color: var(--accent2);
+      letter-spacing: .05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .85rem; color: var(--label); text-decoration: none;
+      letter-spacing: .04em; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent2); }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem clamp(1.5rem,8vw,10rem); max-width: 1100px; margin: 0 auto; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: 100px;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--accent);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      margin-bottom: 1.2rem;
+    }
+    .hero-name span {
+      background: linear-gradient(120deg, var(--accent2) 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-tagline {
+      font-size: clamp(1rem,2.2vw,1.2rem);
+      color: var(--label);
+      max-width: 520px;
+      margin-bottom: 2.4rem;
+    }
+    .hero-stats {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      margin-bottom: 2.8rem;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+    .stat-label { font-size: .75rem; color: var(--muted); letter-spacing: .06em; }
+
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .45rem;
+      padding: .65rem 1.4rem;
+      border-radius: 6px;
+      font-family: var(--sans); font-size: .875rem; font-weight: 600;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 18px var(--glow);
+    }
+    .btn-primary:hover { box-shadow: 0 0 32px rgba(59,130,246,.4); }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--label);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent2); }
+
+    /* Profile photo area */
+    .hero-photo {
+      position: absolute; right: clamp(1.5rem,8vw,10rem); top: 50%;
+      transform: translateY(-50%);
+      width: clamp(160px,18vw,220px);
+      height: clamp(160px,18vw,220px);
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 40px var(--glow);
+      overflow: hidden;
+      background: var(--card);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: .7rem; font-family: var(--mono);
+      text-align: center; padding: 1rem;
+    }
+    .hero-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .section-title {
+      font-size: clamp(1.5rem,3vw,2rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .divider {
+      flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    #about { padding-top: 2rem; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p { color: var(--label); margin-bottom: 1rem; font-size: .95rem; }
+    .skills-grid {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .skill-group {}
+    .skill-group-label {
+      font-family: var(--mono); font-size: .72rem;
+      color: var(--accent); letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag {
+      font-family: var(--mono); font-size: .72rem;
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--label); padding: .22rem .6rem; border-radius: 4px;
+      letter-spacing: .03em;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+      gap: 1.4rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color .2s, box-shadow .2s, transform .2s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 24px var(--glow);
+      transform: translateY(-4px);
+    }
+    .project-img {
+      width: 100%; height: 170px;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted); font-size: .7rem; font-family: var(--mono);
+      text-align: center; padding: 1rem;
+    }
+    .project-img img { width: 100%; height: 100%; object-fit: cover; }
+    .project-body { padding: 1.2rem 1.4rem 1.5rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: .7rem; }
+    .project-tag {
+      font-family: var(--mono); font-size: .65rem;
+      background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.25);
+      color: var(--accent2); padding: .18rem .5rem; border-radius: 3px;
+    }
+    .project-name {
+      font-size: 1.05rem; font-weight: 700; margin-bottom: .45rem;
+      letter-spacing: -.01em;
+    }
+    .project-desc { font-size: .84rem; color: var(--label); line-height: 1.55; }
+    .project-link-hint {
+      margin-top: 1rem;
+      font-family: var(--mono); font-size: .72rem;
+      color: var(--accent); display: flex; align-items: center; gap: .3rem;
+    }
+
+    /* ── EXPERIENCE & EDUCATION ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1px 1fr;
+      gap: 0 1.5rem;
+      padding-bottom: 2.5rem;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .tl-date {
+      font-family: var(--mono); font-size: .72rem; color: var(--muted);
+      padding-top: .15rem; text-align: right; line-height: 1.5;
+    }
+    .tl-line {
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .tl-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+      box-shadow: 0 0 8px var(--glow);
+      margin-top: .25rem;
+    }
+    .tl-bar {
+      width: 1px; flex: 1;
+      background: linear-gradient(to bottom, var(--accent), var(--border));
+      margin-top: 4px;
+    }
+    .timeline-item:last-child .tl-bar { display: none; }
+    .tl-content {}
+    .tl-role {
+      font-weight: 700; font-size: .98rem; margin-bottom: .15rem;
+      letter-spacing: -.01em;
+    }
+    .tl-org {
+      font-family: var(--mono); font-size: .75rem; color: var(--accent2);
+      margin-bottom: .6rem;
+    }
+    .tl-bullets { list-style: none; padding: 0; }
+    .tl-bullets li {
+      font-size: .84rem; color: var(--label); padding-left: 1rem;
+      position: relative; margin-bottom: .3rem; line-height: 1.55;
+    }
+    .tl-bullets li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .7rem; top: .1rem;
+    }
+
+    /* ── AWARDS ── */
+    .award-card {
+      display: flex; align-items: center; gap: 1.4rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.2rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .award-icon {
+      font-size: 2rem; flex-shrink: 0;
+    }
+    .award-title { font-weight: 700; margin-bottom: .2rem; }
+    .award-sub { font-size: .82rem; color: var(--label); }
+
+    /* ── VOLUNTEERING ── */
+    .vol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+      gap: 1rem;
+    }
+    .vol-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.1rem 1.3rem;
+      display: flex; flex-direction: column; gap: .4rem;
+    }
+    .vol-icon { font-size: 1.4rem; }
+    .vol-title { font-weight: 600; font-size: .92rem; }
+    .vol-meta { font-family: var(--mono); font-size: .7rem; color: var(--muted); }
+    .vol-desc { font-size: .81rem; color: var(--label); line-height: 1.5; }
+
+    /* ── CONTACT ── */
+    #contact { padding-bottom: 6rem; }
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+    }
+    .contact-box h2 {
+      font-size: clamp(1.5rem,3vw,2.2rem);
+      font-weight: 700; margin-bottom: .8rem; letter-spacing: -.02em;
+    }
+    .contact-box p { color: var(--label); margin-bottom: 2rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .6rem 1.2rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; text-decoration: none; color: var(--label);
+      font-size: .85rem; transition: border-color .2s, color .2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent2); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.5rem;
+      font-family: var(--mono); font-size: .72rem; color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-photo { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .timeline-item { grid-template-columns: 90px 1px 1fr; }
+      .contact-box { padding: 2rem 1.2rem; }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── CURSOR GLOW ── */
+    .cursor-glow {
+      pointer-events: none; position: fixed; z-index: 0;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,.06) 0%, transparent 70%);
+      transform: translate(-50%,-50%);
+      transition: left .12s ease, top .12s ease;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor-glow" id="glow"></div>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">VRP<span style="color:var(--muted);">.dev</span></span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-eyebrow">Computer Science · Binus University</div>
+    <h1 class="hero-name">Vincentius<br/><span>Richardo Putra</span></h1>
+    <p class="hero-tagline">Building impactful digital solutions through programming, data-driven approaches, and intentional design.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">3.96</span><span class="stat-label">GPA / 4.00</span></div>
+      <div class="stat"><span class="stat-num">3+</span><span class="stat-label">Projects Shipped</span></div>
+      <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Students Mentored</span></div>
+      <div class="stat"><span class="stat-num">🥈</span><span class="stat-label">Competitive Programming</span></div>
+    </div>
+    <div class="cta-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+
+  <!-- Profile Photo -->
+  <!-- 📁 DIR GAMBAR: taruh foto profil lo di folder yang sama dengan file ini, -->
+  <!--    lalu ganti src di bawah ini dengan nama filenya, contoh: src="photo.jpg" -->
+  <div class="hero-photo">
+    <!-- <img src="[FOTO_PROFIL.jpg]" alt="Vincentius Richardo Putra" /> -->
+    <span>📁 foto profil<br/>ganti src di img tag ini</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">01 — About</span>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>CS undergraduate at Binus University with strong academic performance and a passion for building things that matter. I enjoy the intersection of code, data, and design.</p>
+      <p>Beyond class, I've tutored mathematics, mentored 30+ peers through the BINUS Mentoring Program, and supported fresh student onboarding as an Orientation Committee Member.</p>
+      <p>When I'm not coding, I'm volunteering for environmental and community initiatives — from tree planting to neighborhood cleanups.</p>
+
+      <!-- 📁 DIR GAMBAR: taruh foto kegiatan/about lo di folder ini, ganti src di bawah -->
+      <!--
+      <div style="margin-top:1.5rem; border-radius:10px; overflow:hidden; border:1px solid var(--border);">
+        <img src="[FOTO_ABOUT.jpg]" alt="Vincentius activities" style="width:100%;display:block;" />
+      </div>
+      -->
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-label">Languages</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">C</span>
+          <span class="tag">Java</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Tools & Frameworks</div>
+        <div class="tags">
+          <span class="tag">XGBoost</span>
+          <span class="tag">Decision Tree</span>
+          <span class="tag">Figma</span>
+          <span class="tag">Microsoft Excel</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Domains</div>
+        <div class="tags">
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Data Analysis</span>
+          <span class="tag">UI/UX Design</span>
+          <span class="tag">Database Management</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-label">Soft Skills</div>
+        <div class="tags">
+          <span class="tag">Leadership</span>
+          <span class="tag">Critical Thinking</span>
+          <span class="tag">Teamwork</span>
+          <span class="tag">Adaptability</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">02 — Projects</span>
+    <div class="divider"></div>
+  </div>
+  <div class="projects-grid">
+
+    <!-- PROJECT 1: SolarIntelligence -->
+    <!-- 📁 DIR GAMBAR: taruh screenshot project di folder ini, ganti src di bawah -->
+    <!-- Ganti href dengan URL deploy aslinya -->
+    <a class="project-card reveal" href="https://[URL-DEPLOY-SOLARINTELLIGENCE]" target="_blank" rel="noopener">
+      <div class="project-img">
+        <!-- <img src="[SOLAR_SCREENSHOT.png]" alt="SolarIntelligence" /> -->
+        <span>📁 screenshot<br/>SolarIntelligence</span>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">XGBoost</span>
+          <span class="project-tag">Machine Learning</span>
+        </div>
+        <div class="project-name">SolarIntelligence</div>
+        <div class="project-desc">Predictive analytics to estimate solar energy output using environmental &amp; location-based data. Implemented XGBoost to analyze factors influencing generation accuracy.</div>
+        <div class="project-link-hint">↗ View Live Project</div>
+      </div>
+    </a>
+
+    <!-- PROJECT 2: NutriScan -->
+    <!-- 📁 DIR GAMBAR: taruh screenshot project di folder ini, ganti src di bawah -->
+    <!-- Ganti href dengan URL deploy aslinya -->
+    <a class="project-card reveal" href="https://[URL-DEPLOY-NUTRISCAN]" target="_blank" rel="noopener">
+      <div class="project-img">
+        <!-- <img src="[NUTRISCAN_SCREENSHOT.png]" alt="NutriScan" /> -->
+        <span>📁 screenshot<br/>NutriScan</span>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Decision Tree</span>
+          <span class="project-tag">ML</span>
+        </div>
+        <div class="project-name">NutriScan</div>
+        <div class="project-desc">ML-based app to classify food as healthy or unhealthy by analyzing nutritional content using a Decision Tree algorithm with data preprocessing &amp; model evaluation.</div>
+        <div class="project-link-hint">↗ View Live Project</div>
+      </div>
+    </a>
+
+    <!-- PROJECT 3: Reado -->
+    <!-- 📁 DIR GAMBAR: taruh screenshot project di folder ini, ganti src di bawah -->
+    <!-- Ganti href dengan URL deploy aslinya -->
+    <a class="project-card reveal" href="https://[URL-DEPLOY-READO]" target="_blank" rel="noopener">
+      <div class="project-img">
+        <!-- <img src="[READO_SCREENSHOT.png]" alt="Reado" /> -->
+        <span>📁 screenshot<br/>Reado</span>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="project-tag">Figma</span>
+          <span class="project-tag">UI/UX</span>
+          <span class="project-tag">OCR</span>
+          <span class="project-tag">Accessibility</span>
+        </div>
+        <div class="project-name">Reado</div>
+        <div class="project-desc">Assistive reading solution for visually impaired users — captures printed text via smartphone camera and converts it to spoken audio output. Focused on inclusive, accessible design.</div>
+        <div class="project-link-hint">↗ View Live Project</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">03 — Experience</span>
+    <div class="divider"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">Apr 2026 – Present</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">
+        <div class="tl-role">Mathematics Tutor</div>
+        <div class="tl-org">PT Algorithmics</div>
+        <ul class="tl-bullets">
+          <li>Delivered online math sessions to 20+ students with varying backgrounds.</li>
+          <li>Simplified complex concepts and adapted teaching per student progress.</li>
+          <li>Monitored individual performance to adjust lesson pacing.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">Jan 2026 – Present</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">
+        <div class="tl-role">Class Administrator</div>
+        <div class="tl-org">Harisenin Bootcamp</div>
+        <ul class="tl-bullets">
+          <li>Managed records for 200+ participants, ensuring data accuracy across tracking systems.</li>
+          <li>Coordinated scheduling, reminders, and participant communication.</li>
+          <li>Monitored task completion and reported progress to improve efficiency.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">Aug 2025 – Present</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">
+        <div class="tl-role">Peer Mentor — BINUS Mentoring Program</div>
+        <div class="tl-org">BINUS University (Period 25–1 & 25–2)</div>
+        <ul class="tl-bullets">
+          <li>Selected for two consecutive periods to support peer academic development.</li>
+          <li>Mentored 30+ students through collaborative study sessions and problem solving.</li>
+          <li>Contributed to improving cohort performance through structured peer support.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">Aug 2025 – Present</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">
+        <div class="tl-role">Orientation Committee Member</div>
+        <div class="tl-org">Freshmen Development Program — BINUS University</div>
+        <ul class="tl-bullets">
+          <li>Supported onboarding of 50+ incoming students into campus culture and academic systems.</li>
+          <li>Facilitated structured activities to develop self-awareness and collaboration.</li>
+          <li>Coordinated between committee members for smooth orientation execution.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">Aug 2024 – Present</div>
+      <div class="tl-line"><div class="tl-dot"></div><div class="tl-bar"></div></div>
+      <div class="tl-content">
+        <div class="tl-role">Bachelor of Computer Science</div>
+        <div class="tl-org">BINUS University — GPA 3.96 / 4.00</div>
+        <ul class="tl-bullets">
+          <li>Programming & Software Development, Data Processing & Analysis.</li>
+          <li>UI/UX and Digital Product Design, Computational Thinking.</li>
+          <li>Expected graduation: 2029.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" style="padding-top:0;">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">04 — Awards</span>
+    <div class="divider"></div>
+  </div>
+
+  <!-- 📁 DIR GAMBAR: taruh foto piala/sertifikat lo di folder ini, bisa uncomment block di bawah -->
+  <div class="award-card reveal">
+    <div class="award-icon">🥈</div>
+    <div>
+      <div class="award-title">2nd Place — HIMTI Competitive Programming Competition</div>
+      <div class="award-sub">BINUS University · August 2024 · Algorithmic problem solving under time constraints.</div>
+      <!--
+      <div style="margin-top:.8rem; border-radius:8px; overflow:hidden; max-width:300px;">
+        <img src="[FOTO_AWARD.jpg]" alt="Award certificate" style="width:100%;display:block;" />
+      </div>
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEERING -->
+<section id="volunteering" style="padding-top:0;">
+  <div class="section-header reveal">
+    <span class="section-eyebrow">05 — Volunteering</span>
+    <div class="divider"></div>
+  </div>
+  <div class="vol-grid">
+    <div class="vol-card reveal">
+      <div class="vol-icon">🌱</div>
+      <div class="vol-title">Tree Planting Volunteer</div>
+      <div class="vol-meta">Environmental Conservation Program · Nov 2025</div>
+      <div class="vol-desc">Contributed to ecosystem preservation through organized tree planting and community environmental awareness.</div>
+      <!-- 📁 DIR GAMBAR: <img src="[FOTO_TREE.jpg]" ... /> -->
+    </div>
+    <div class="vol-card reveal">
+      <div class="vol-icon">📚</div>
+      <div class="vol-title">Teaching Volunteer</div>
+      <div class="vol-meta">Elementary School Program · Feb–Apr 2025</div>
+      <div class="vol-desc">Assisted Grade 6 students through interactive learning sessions, adapting to different learning needs and encouraging active participation.</div>
+      <!-- 📁 DIR GAMBAR: <img src="[FOTO_TEACHING.jpg]" ... /> -->
+    </div>
+    <div class="vol-card reveal">
+      <div class="vol-icon">🧹</div>
+      <div class="vol-title">Environmental Cleanup Volunteer</div>
+      <div class="vol-meta">Bundaran HI Community Initiative · Nov 2024</div>
+      <div class="vol-desc">Participated in public area cleanup to promote environmental awareness and social responsibility at Bundaran HI.</div>
+      <!-- 📁 DIR GAMBAR: <img src="[FOTO_CLEANUP.jpg]" ... /> -->
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box reveal">
+    <h2>Let's Connect</h2>
+    <p>Open to collaborations, internship opportunities, and cool ideas.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:vincentius.putra003@binus.ac.id">
+        ✉️ vincentius.putra003@binus.ac.id
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/vincentius-richardo-putra-539735326" target="_blank" rel="noopener">
+        🔗 LinkedIn
+      </a>
+      <a class="contact-link" href="https://github.com/VincentiusRP" target="_blank" rel="noopener">
+        💻 GitHub
+      </a>
+      <a class="contact-link" href="tel:0817100306">
+        📞 0817100306
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Built by Vincentius Richardo Putra · <span id="year"></span>
+</footer>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Cursor glow
+  const glow = document.getElementById('glow');
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top  = e.clientY + 'px';
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
