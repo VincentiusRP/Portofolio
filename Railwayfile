@@ -1,0 +1,5 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "nginx -g 'daemon off;' -c /etc/nginx/nginx.conf"
