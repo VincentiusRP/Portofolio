@@ -372,3 +372,16 @@
   object-position: center 15%;
   transform: scale(1.7) translate(10px, -20px);
 }
+
+.project-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--border) 100%);
+  min-height: 160px;
+}
+
+.project-img-icon {
+  font-size: 3rem;
+  opacity: 0.6;
+}
